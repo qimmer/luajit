@@ -72,7 +72,12 @@ set ( LUA_CPATH_DEFAULT "./?${LUA_MODULE_SUFFIX};${LUA_DIR}${LUA_CDIR}/?${LUA_MO
 
 if ( WIN32 AND NOT CYGWIN )
   # Windows systems
-  add_definitions ( -DLUA_BUILD_AS_DLL -DLUAJIT_OS=LUAJIT_OS_WINDOWS)
+  add_definitions (-DLUAJIT_OS=LUAJIT_OS_WINDOWS)
+
+  IF( ${BUILD_SHARED_LIBS} )
+    add_definitions (-DLUA_BUILD_AS_DLL)
+  ENDIF ()
+
   option ( LUA_BUILD_WLUA "Build wluajit interpreter for no-console applications." ON )
   set ( LJVM_MODE peobj )
   # Paths (Double escapes needed)
